@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+
+/*
+Custom component class here
+i.e.
+.btn { ... }
+.form-input { ... }
+*/
+
+@tailwind utilities;
+
+/*
+Custom utility classes here
+i.e.
+.bg-pattern-graph-paper { ... }
+.skew-45 { ... }
+*/
