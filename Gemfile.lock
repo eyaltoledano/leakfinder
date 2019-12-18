@@ -63,6 +63,7 @@ GEM
       rails-erd (>= 0.4.5)
     erubi (1.9.0)
     ffi (1.11.3)
+    foreman (0.86.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.7.0)
@@ -161,6 +162,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
   erd
+  foreman
   listen (>= 3.0.5, < 3.2)
   pg
   pry

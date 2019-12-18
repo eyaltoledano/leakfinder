@@ -6,12 +6,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "http-proxy-middleware": "^0.20.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
   },
   "scripts": {
-    "build:style":"tailwind build src/styles/index.css -o src/styles/tailwind.css",
+    "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
     "start": "npm run build:style && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
