@@ -1,0 +1,2 @@
+class CalculationsController < ApplicationController
+end

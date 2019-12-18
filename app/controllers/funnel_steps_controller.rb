@@ -1,0 +1,2 @@
+class FunnelStepsController < ApplicationController
+end

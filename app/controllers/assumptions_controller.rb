@@ -1,0 +1,2 @@
+class AssumptionsController < ApplicationController
+end
