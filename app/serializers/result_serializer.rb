@@ -1,4 +1,8 @@
 class ResultSerializer < ActiveModel::Serializer
-  attributes :id
-  has_one :calculation
+  attributes :id, :assumptions
+
+  def assumptions
+    object.calculation.assumptions
+  end
+
 end

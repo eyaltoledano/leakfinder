@@ -5,5 +5,9 @@ Rails.application.routes.draw do
     resources :assumptions
     resources :calculations
     resources :users
+
+    get '/calculations/:id/assumptions' => 'calculations#assumptions'
+    get '/calculations/:id/funnel_steps' => 'calculations#funnel_steps'
+    get '/calculations/:id/result' => 'calculations#result'
   end
 end
