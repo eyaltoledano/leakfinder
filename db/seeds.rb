@@ -10,7 +10,7 @@ state = {
 # Step 1
 calculation = Calculation.new(name: state[:name], time_dimension: state[:time_dimension])
 calculation.user = User.create(email: 'john@doe.com')
-calculation.save # cannot call create in Step 2 unless calculation is persisted
+calculation.save 
 
 # Step 2
 state[:assumptions].each do |assumption_key, assumption_value|

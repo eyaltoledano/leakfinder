@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :funnel_steps
     resources :assumptions
     resources :calculations
-    resources :users
+    resources :users, only: :create
 
     # Calculation Routes
     get '/calculations/:id/assumptions' => 'calculations#assumptions'
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get '/calculations/:id/result/leaking_volume' => 'calculations#leaking_volume'
 
     # POST route needed for creating a new calculation
+
     # POST route needed for creating a new user
   end
 end

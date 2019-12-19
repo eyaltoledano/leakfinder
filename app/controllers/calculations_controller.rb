@@ -5,6 +5,13 @@ class CalculationsController < ApplicationController
     render json: @calculations
   end
 
+  def create
+    # create the user first with the email in the params
+    # for that user, create the calculation
+    # create the result for the calculator
+    # then render json of the calculation
+  end
+
   def show
     @calculation = Calculation.find(params[:id])
     render json: @calculation
@@ -47,6 +54,12 @@ class CalculationsController < ApplicationController
     @calculation = Calculation.find(params[:id])
     result = @calculation.result
     render json: result.leaking_volume
+  end
+
+  private
+
+  def calculation_params
+    params.require(:user).permit(:email)
   end
 
 end
