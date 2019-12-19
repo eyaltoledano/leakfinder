@@ -1,12 +1,12 @@
 class ResultSerializer < ActiveModel::Serializer
-  attributes :id, :runrate, :funnel_breakdown
+  attributes :id, :runrate, :conversion_rates
 
   def runrate
     object.runrate
   end
 
-  def funnel_breakdown
-    object.funnel_breakdown
+  def conversion_rates
+    object.conversion_rates
   end
 
 end

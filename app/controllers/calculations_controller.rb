@@ -31,10 +31,10 @@ class CalculationsController < ApplicationController
     render json: result.runrate
   end
 
-  def funnel_breakdown
+  def conversion_rates
     @calculation = Calculation.find(params[:id])
     result = @calculation.result
-    render json: result.funnel_breakdown
+    render json: result.conversion_rates
   end
 
   def conversion_values

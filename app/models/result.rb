@@ -41,16 +41,21 @@ class Result < ApplicationRecord
     end
   end
 
-  def funnel_breakdown
+  def conversion_rates
+    output = {}
     funnel_steps = self.calculation.funnel_steps
-    steps = funnel_steps.each do |index, step|
-      binding.pry
-    end
-    # returns a hash with dynamic values, where the key is a concatenation of the current key, "to" and the next key and the value is
-    # i.e. {
-    # =>     "Visit to Purchase": "0.09"
-    # =>   }
+    steps = funnel_steps.each do |step|
+      unless step == funnel_steps.last
+        next_step = funnel_steps.detect {|s| s.id == step.id + 1}
 
+        stage = step.name + " to " + next_step.name
+
+        conversion_rate = (next_step.value.percent_of(step.value) / 100).round(3)
+
+        output[stage] = conversion_rate
+      end
+    end
+    output
   end
 
   def conversion_values
