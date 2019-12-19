@@ -59,28 +59,57 @@ class Result < ApplicationRecord
   end
 
   def conversion_values
-    # uses the conversion rate of funnel_breakdown { "Visit to Purchase": "0.09" } with the volume of each step to determine the value of each funnel_breakdown item by multiplying the AOV
-    # aov = 150
-    #
+    output = {}
+
+    conversion_rates = self.conversion_rates
 
     aov = self.calculation.assumptions.detect {|a| a.name == 'Average order value' || 'Average Order Value' || 'average order value'}.value
-    steps = self.calculation.funnel_steps
-    # funnel_breakdown = self.funnel_breakdown
-    funnel_breakdown = { "Visit to Purchase": "0.09"} # stub out
 
-    # 1. get the last funnel step  and attach aov to it
-    last_step = steps.to_a.last.name # Purchase
-    second_to_last_step = funnel_breakdown.to_a.last[0].to_s.split[0] # Visit
-    last_step_value = aov # 150
+    funnel_steps = self.calculation.funnel_steps
+    last_step = funnel_steps.last
+    last_step.conversion_value = aov
+    last_step.save
+    output[last_step.name.to_s.titlecase] = aov.to_f
 
-    # 2. once we know the value of the last step, finds its conversion rate in the funnel breakdown
-    query = second_to_last_step + " to " + last_step
-    conversion_rate = funnel_breakdown[:"#{query}"]
+    funnel_steps.reverse.each do |step|
+      unless step == funnel_steps.first
+        previous_step = funnel_steps.detect {|s| s.id == step.id - 1}
+        previous_step_value = previous_step.value
+        conversion_rate = step.value.percent_of(previous_step_value)
 
+        previous_step.conversion_value = step.conversion_value * (conversion_rate / 100)
 
-    # 3. Finally,
+        output["#{previous_step.name.to_s.titlecase}"] = previous_step.conversion_value
+      end
+    end
+    
+    output
   end
 
   def leaking_volume
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+# aov = self.calculation.assumptions.detect {|a| a.name == 'Average order value' || 'Average Order Value' || 'average order value'}.value
+# steps = self.calculation.funnel_steps
+# # funnel_breakdown = self.funnel_breakdown
+# funnel_breakdown = { "Visit to Purchase": "0.09"} # stub out
+#
+# # 1. get the last funnel step  and attach aov to it
+# last_step = steps.to_a.last.name # Purchase
+# second_to_last_step = funnel_breakdown.to_a.last[0].to_s.split[0] # Visit
+# last_step_value = aov # 150
+#
+# # 2. once we know the value of the last step, finds its conversion rate in the funnel breakdown
+# query = second_to_last_step + " to " + last_step
+# conversion_rate = funnel_breakdown[:"#{query}"]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_020632) do
+ActiveRecord::Schema.define(version: 2019_12_19_192841) do
 
   create_table "assumptions", force: :cascade do |t|
     t.string "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_020632) do
     t.integer "calculation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "conversion_value"
     t.index ["calculation_id"], name: "index_funnel_steps_on_calculation_id"
   end
 

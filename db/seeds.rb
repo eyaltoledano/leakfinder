@@ -3,7 +3,7 @@ state = {
   name: "Ecommerce Test Funnel",
   time_dimension: 30,
   assumptions: { average_order_value: 150 },
-  funnel_steps: { "visits": "1000", "purchases": "90" },
+  funnel_steps: { "visits": "1000", "purchases": "90", "retained": "76" },
   email: 'test@test.com'
 }
 
