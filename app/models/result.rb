@@ -5,7 +5,9 @@ class Result < ApplicationRecord
     aov = self.calculation.assumptions.detect {|a| a.name == 'Average order value' || 'Average Order Value' || 'average order value'}.value
 
     last_step_volume = self.calculation.funnel_steps.to_a.last.value.to_i
+
     revenue_for_dimension = last_step_volume * aov
+
     time_dimension = self.calculation.time_dimension
 
     if time_dimension === 1
@@ -40,10 +42,15 @@ class Result < ApplicationRecord
   end
 
   def funnel_breakdown
+    funnel_steps = self.calculation.funnel_steps
+    steps = funnel_steps.each do |index, step|
+      binding.pry
+    end
     # returns a hash with dynamic values, where the key is a concatenation of the current key, "to" and the next key and the value is
     # i.e. {
     # =>     "Visit to Purchase": "0.09"
     # =>   }
+
   end
 
   def conversion_values

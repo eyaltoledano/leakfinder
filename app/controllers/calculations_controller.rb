@@ -8,7 +8,6 @@ class CalculationsController < ApplicationController
   def show
     @calculation = Calculation.find(params[:id])
     render json: @calculation
-
   end
 
   def assumptions
@@ -24,6 +23,30 @@ class CalculationsController < ApplicationController
   def result
     @calculation = Calculation.find(params[:id])
     render json: @calculation.result
+  end
+
+  def runrate
+    @calculation = Calculation.find(params[:id])
+    result = @calculation.result
+    render json: result.runrate
+  end
+
+  def funnel_breakdown
+    @calculation = Calculation.find(params[:id])
+    result = @calculation.result
+    render json: result.funnel_breakdown
+  end
+
+  def conversion_values
+    @calculation = Calculation.find(params[:id])
+    result = @calculation.result
+    render json: result.conversion_values
+  end
+
+  def leaking_volume
+    @calculation = Calculation.find(params[:id])
+    result = @calculation.result
+    render json: result.leaking_volume
   end
 
 end
