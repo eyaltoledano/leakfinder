@@ -17,8 +17,9 @@ Rails.application.routes.draw do
     get '/calculations/:id/result/conversion_values' => 'calculations#conversion_values'
     get '/calculations/:id/result/leaking_volume' => 'calculations#leaking_volume'
 
-    # POST route needed for creating a new calculation
+    # POST route needed for creating a new calculation (user first)
+    post '/calculations' => 'calculations#create'
 
-    # POST route needed for creating a new user
+
   end
 end
