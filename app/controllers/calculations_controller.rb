@@ -6,27 +6,23 @@ class CalculationsController < ApplicationController
   end
 
   def create
-    binding.pry
-    @user = User.new(email: params[:email])
-    binding.pry
-    @calculation = @user.calculations.create(params[:calculation])
-    binding.pry
-    @calculation.result = Result.new
-    binding.pry
-    render json: @calculation
-    # params needs to look like
-    # {
-    #   email: 'test@test.com',
-    #   calculation: {
-    #     name: "Ecommerce Test Funnel",
-    #     time_dimension: 30,
-    #     assumptions: { average_order_value: 150 },
-    #     funnel_steps: { "visits": "1000", "purchases": "90", "retained": "76" }
-    # }
+    @user = User.find_or_create_by(user_params)
+    @calculation = @user.calculations.create(name: calculation_params[:name])
+    @calculation.time_dimension = calculation_params[:time_dimension]
 
-    # for that user, create the calculation
-    # create the result for the calculator
-    # then render json of the calculation
+    calculation_params[:assumptions].each do |assumption_name, assumption_value|
+      @calculation.assumptions.create(name: assumption_name, value: assumption_value)
+    end
+
+    calculation_params[:funnel_steps].each do |step_name, step_value|
+      @calculation.funnel_steps.create(name: step_name, value: step_value)
+    end
+
+    result = Result.new
+    @calculation.result = result
+
+    @calculation.save
+    render json: @calculation
   end
 
   def show
@@ -80,7 +76,6 @@ class CalculationsController < ApplicationController
   end
 
   def calculation_params
-    # assumptions and funnel_steps need to be converted to hashes
     params.require(:calculation).permit(:name, :time_dimension, :assumptions => {}, :funnel_steps => {}).to_h
   end
 
