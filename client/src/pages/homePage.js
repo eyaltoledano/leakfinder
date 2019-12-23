@@ -1,9 +1,7 @@
 import React from 'react'
-import Navigation from '../components/navigation'
-import App from '../App'
+import FormContainer from '../containers/FormContainer'
 
 class HomePage extends React.Component {
-
   state = {
     showApp: false
   }
@@ -16,15 +14,19 @@ class HomePage extends React.Component {
 
   renderCta = () => {
     // This will need some love with Tailwind. Namely a hero unit
-    return <button ref='cta' onClick={event => this.handleClick(event)}>New Calculation</button>
+    return(
+      <div>
+        <h1>Welcome to Leakfinder</h1>
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' ref='cta' onClick={event => this.handleClick(event)}>New Calculation</button>
+      </div>
+    )
   }
 
   render() {
-
     return (
       <div className="container mx-auto p-4 mt-4">
-        <p>Welcome to Leakfinder</p>
-        {this.state.showApp ? <App /> : this.renderCta()}
+        <p>{this.props.calculation_complete}</p>
+        {this.state.showApp ? <FormContainer /> : this.renderCta()}
       </div>
     )
   }

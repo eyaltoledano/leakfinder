@@ -1,5 +1,4 @@
 import React from 'react'
-import Navigation from '../components/navigation'
 
 class ApiPage extends React.Component {
   render() {

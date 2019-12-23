@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import HomePage from './pages/homePage'
+import AboutPage from './pages/aboutPage'
+import ResultPage from './pages/resultPage'
+import ApiPage from './pages/apiPage'
 import Navigation from './components/navigation'
 
-function App() {
-  return (
-    <div className='container mx-auto mt-4'>
-      <div class="flex flex-wrap -mx-4">
-            <div class="w-full mb-6 lg:mb-1 lg:w-full px-4 flex flex-col">
-              <div class="flex-grow flex flex-col bg-white border-t border-b sm:rounded sm:border shadow overflow-hidden">
-                <div class="border-b p-6">
-                Calculator will go here
-                </div>
-              </div>
-            </div>
-      </div>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className="App container mx-auto p-4">
+            <Navigation />
+
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/about" component={AboutPage} />
+            <Route exact path="/result" component={ResultPage} />
+            <Route exact path="/programmatic" component={ApiPage} />
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
