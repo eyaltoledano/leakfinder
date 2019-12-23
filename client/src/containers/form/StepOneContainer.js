@@ -3,9 +3,21 @@ import { connect } from 'react-redux'
 
 class StepOneContainer extends Component {
 
+  state = {
+    time_dimension: 30,
+    average_order_value: ""
+  }
+
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value});
+  }
+
   componentDidMount() {
     console.log("Step 1 Mounted");
-    console.log(this.props);
+  }
+
+  componentDidUpdate() {
+    console.log(this.state);
   }
 
   render() {
@@ -14,7 +26,12 @@ class StepOneContainer extends Component {
           <span className="text-gray-500">Over the last...</span>
 
           <div class="relative">
-            <select name="time_dimension" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="time_dimension_input">
+            <select
+              onChange={event => this.handleChange(event)}
+              name="time_dimension"
+              class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="time_dimension_input"
+            >
               <option value="1">Day</option>
               <option value="7">Week</option>
               <option value="30" selected>Month</option>
@@ -27,7 +44,12 @@ class StepOneContainer extends Component {
 
           <span className="text-gray-500">My Average Order Value is...</span>
 
-          <input type="number" name="average_order_value" className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+          <input
+            onChange={event => this.handleChange(event)}
+            type="number"
+            name="average_order_value"
+            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          />
 
           <button onClick={event => event.preventDefault()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Next Step</button>
       </div>
