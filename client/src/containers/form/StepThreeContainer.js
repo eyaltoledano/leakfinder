@@ -7,11 +7,6 @@ class StepThreeContainer extends Component {
     email: ""
   }
 
-  componentDidMount() {
-    console.log("Ready to dispatch:");
-    console.log(this.props.calculation)
-  }
-
   handleFinishedClick = (event) => {
     event.preventDefault()
     this.props.dispatch({ type: 'STEP3_COMPLETE', email: this.state.email })
@@ -27,7 +22,7 @@ class StepThreeContainer extends Component {
     return(
       <div>
         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email">
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
             Email address
           </label>
           <input name='email' onChange={event => this.handleChange(event)} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white stepName" type="text" placeholder="Enter an email to get results" />

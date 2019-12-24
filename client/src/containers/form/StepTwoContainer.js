@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import FunnelStep from '../../components/form/funnelStep'
 import FunnelStepsContainer from './FunnelStepsContainer'
 
 class StepTwoContainer extends Component {

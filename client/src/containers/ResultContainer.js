@@ -1,12 +1,31 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
-// import individual result components
+import axios from 'axios'
 
 class ResultContainer extends Component {
 
+  state = {
+    result: {}
+  }
+
   componentDidMount() {
-    console.log(this.props);
-    
+    let props = this.props
+
+    console.log(props);
+
+    fetch('http://localhost:3000/api/calculations',{
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+                    'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.props)
+    }).then(response => {
+            console.log(response)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+
   }
 
   render() {

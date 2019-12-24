@@ -20,7 +20,6 @@ class FunnelStepsContainer extends React.Component {
   handleChange = (event) => {
     let eventName = event.target.name.split('-')[0] // name/value
     let id = event.target.name.split('-')[1] // 0, 1, 2, 3, 4...
-    let value = event.target.value // some string
 
     if (["name", "value"].includes(eventName)) {
       let funnelSteps = [...this.state.funnelSteps]
@@ -46,7 +45,6 @@ class FunnelStepsContainer extends React.Component {
               <div className="border-b p-6 mx-auto">
 
                 { funnelSteps.map((val, idx) => {
-                  let stepId = `step-${idx}`
                   return(
                     <div key={idx}>
                       <FunnelStep handleChange={event => this.handleChange(event)} id={idx} name={val.name} value={val.value} />

@@ -61,10 +61,5 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    STEP1_COMPLETE: {type: 'STEP1_COMPLETE', time_dimension: this.state.time_dimension, average_order_value: this.state.average_order_value}
-  }
-}
 
 export default connect(mapStateToProps)(StepOneContainer)
