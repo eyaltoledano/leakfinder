@@ -28,7 +28,9 @@ class StepThreeContainer extends Component {
           <input name='email' onChange={event => this.handleChange(event)} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white stepName" type="text" placeholder="Enter an email to get results" />
         </div>
 
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full float-right' onClick={event => this.handleFinishedClick(event)}>Get Results</button>
+        <button type="submit" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full float-right'
+        onClick={event => this.handleFinishedClick(event)}
+        >Get Results</button>
       </div>
     )
   }

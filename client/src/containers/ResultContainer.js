@@ -12,19 +12,7 @@ class ResultContainer extends Component {
 
     console.log(props);
 
-    fetch('http://localhost:3000/api/calculations',{
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-                    'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(this.props)
-    }).then(response => {
-            console.log(response)
-        })
-        .catch(error =>{
-            console.log(error)
-        })
+    // post request to localhost/api/calculations with this.props
 
   }
 

@@ -16,7 +16,7 @@ function manageCalculations(state = initState, action) {
 
     case 'NEW_CALCULATION':
       return {
-        calculation: state.calculation
+        request: state
       };
 
     case 'STEP1_COMPLETE':
