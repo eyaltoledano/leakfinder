@@ -47,7 +47,8 @@ class StepOneContainer extends Component {
             className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           />
 
-          <button onClick={event => this.handleButtonClick(event)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Next Step</button>
+          <button onClick={event => this.handleButtonClick(event)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-3 float-right">Continue</button>
+          <button className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full float-left mt-3' href="/">Start Over</button>
       </div>
     )
   }

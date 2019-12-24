@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import FunnelStep from '../../components/form/funnelStep'
+import FunnelStepsContainer from './FunnelStepsContainer'
+import cuid from 'cuid'
 
 class StepTwoContainer extends Component {
   state = {
-    funnel_steps: {}
+    funnel_steps: {
+      visits: 1000
+    }
   }
 
   componentDidMount() {
@@ -13,18 +18,30 @@ class StepTwoContainer extends Component {
   handleClick = (event) => {
     event.preventDefault()
     console.log('click handled');
+
   }
 
-  // handleNextStepClick = (event) => {
-  //   event.preventDefault()
-  //   this.props.dispatch({ type: 'STEP2_COMPLETE', funnel_steps: this.state.funnel_steps })
-  // }
+  handleNextClick = (event) => {
+    event.preventDefault()
+    console.log(this.state);
+    this.props.dispatch({ type: 'STEP2_COMPLETE', funnel_steps: this.state.funnel_steps })
+  }
 
   render() {
     return(
       <div>
-        <p className="text-gray-500">Draw your conversion funnel below</p>
-         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={event => this.handleClick(event)}>Add a Funnel Step</button>
+        <p className="text-gray-500 mb-3">
+          Draw your conversion funnel below
+
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full float-right' onClick={event => this.handleClick(event)}>Add a Funnel Step</button>
+        </p>
+
+         <section>
+           <FunnelStepsContainer funnelSteps={this.state.funnel_steps} />
+         </section>
+
+         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full float-right' onClick={event => this.handleNextClick(event)}>Continue</button>
+         <button className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full float-left' href="/">Start Over</button>
       </div>
     )
   }
