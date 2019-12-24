@@ -1,5 +1,6 @@
 import React from 'react'
 import FunnelStep from '../../components/form/funnelStep'
+import { connect } from 'react-redux'
 
 class FunnelStepsContainer extends React.Component {
 
@@ -24,10 +25,15 @@ class FunnelStepsContainer extends React.Component {
     if (["name", "value"].includes(eventName)) {
       let funnelSteps = [...this.state.funnelSteps]
       funnelSteps[id][eventName] = event.target.value
-      this.setState({funnelSteps}, () => console.log(this.state.funnelSteps))
+      this.setState({funnelSteps})
     } else {
       this.setState({ [eventName]: event.target.value })
     }
+  }
+
+  handleNextClick = (event) => {
+    event.preventDefault()
+    this.props.dispatch({ type: 'STEP2_COMPLETE', funnel_steps: this.state.funnelSteps })
   }
 
   render() {
@@ -48,7 +54,9 @@ class FunnelStepsContainer extends React.Component {
                   )
                 })}
 
-                <button className='block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={event => this.addStep(event)}>Add a Funnel Step</button>
+                <button className='block bg-gray-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full' onClick={event => this.addStep(event)}>Add a Funnel Step</button>
+
+                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full float-right' onClick={event => this.handleNextClick(event)}>Continue</button>
 
               </div>
             </div>
@@ -59,4 +67,4 @@ class FunnelStepsContainer extends React.Component {
   }
 }
 
-export default FunnelStepsContainer
+export default connect()(FunnelStepsContainer)

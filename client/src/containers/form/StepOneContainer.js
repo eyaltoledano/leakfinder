@@ -56,7 +56,6 @@ class StepOneContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    calculation_complete: state.calculation_complete,
     email: state.email,
     calculation: state.calculation
   }

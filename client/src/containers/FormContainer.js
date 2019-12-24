@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import StepOneContainer from './form/StepOneContainer'
 import StepTwoContainer from './form/StepTwoContainer'
 import StepThreeContainer from './form/StepThreeContainer'
+import ResultPage from '../pages/resultPage'
 
 class FormContainer extends Component {
   renderStep(state) {
@@ -13,6 +14,8 @@ class FormContainer extends Component {
         return <StepTwoContainer />
       case 3:
         return <StepThreeContainer />
+      case 'complete':
+        return <ResultPage />
       default:
         return <StepOneContainer />
     }
@@ -40,7 +43,6 @@ class FormContainer extends Component {
 const mapStateToProps = state => {
   return {
     step: state.step,
-    calculation_complete: state.calculation_complete,
     email: state.email,
     calculation: state.calculation
   }

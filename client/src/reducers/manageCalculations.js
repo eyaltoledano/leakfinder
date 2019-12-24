@@ -2,7 +2,6 @@ import { generateName } from './helpers/generateName'
 
 const initState = {
   step: 1,
-  calculation_complete: false,
   email: "",
   calculation: {
     name: "",
@@ -23,10 +22,9 @@ function manageCalculations(state = initState, action) {
     case 'STEP1_COMPLETE':
       return {
         step: state.step + 1,
-        calculation_complete: false,
         email: "",
         calculation: {
-          name: generateName(),
+          name: (generateName() + " Calculation"),
           time_dimension: action.time_dimension,
           assumptions: {
             average_order_value: action.average_order_value
@@ -36,34 +34,43 @@ function manageCalculations(state = initState, action) {
       }
 
     case 'STEP2_COMPLETE':
+      let stepHash = {}
+      action.funnel_steps.map(step => {
+        stepHash[step.name.toString()] = step.value
+      })
+
       return {
         step: state.step + 1,
-        calculation_complete: false,
         email: "",
         calculation: {
-          name: state.name,
-          time_dimension: state.time_dimension,
+          name: state.calculation.name,
+          time_dimension: state.calculation.time_dimension,
           assumptions: {
-            average_order_value: state.average_order_value
+            average_order_value: state.calculation.assumptions.average_order_value
           },
-          funnel_steps: action.funnel_steps
+          funnel_steps: stepHash
         }
       }
 
     case 'STEP3_COMPLETE':
       return {
-        step: state.step,
-        calculation_complete: true,
+        step: 'complete',
         email: action.email,
         calculation: {
-          name: state.name,
-          time_dimension: state.time_dimension,
+          name: state.calculation.name,
+          time_dimension: state.calculation.time_dimension,
           assumptions: {
-            average_order_value: state.average_order_value
+            average_order_value: state.calculation.assumptions.average_order_value
           },
-          funnel_steps: state.funnel_steps
+          funnel_steps: state.calculation.funnel_steps
         }
       }
+
+    case 'GET_RESULTS':
+      return state
+      // 1. create action to api, which returns result object
+      // 2. redirect to result page
+      // 3. assign results to state.result
 
     default:
       return state;

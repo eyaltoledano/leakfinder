@@ -3,14 +3,37 @@ import { connect } from 'react-redux'
 
 class StepThreeContainer extends Component {
 
+  state = {
+    email: ""
+  }
+
   componentDidMount() {
-    console.log("Step 3 Mounted with " + this.props);
+    console.log("Ready to dispatch:");
+    console.log(this.props.calculation)
+  }
+
+  handleFinishedClick = (event) => {
+    event.preventDefault()
+    this.props.dispatch({ type: 'STEP3_COMPLETE', email: this.state.email })
+  }
+
+  handleChange = event => {
+    this.setState({
+      email: event.target.value
+    })
   }
 
   render() {
     return(
       <div>
-        Step 3
+        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email">
+            Email address
+          </label>
+          <input name='email' onChange={event => this.handleChange(event)} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white stepName" type="text" placeholder="Enter an email to get results" />
+        </div>
+
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full float-right' onClick={event => this.handleFinishedClick(event)}>Get Results</button>
       </div>
     )
   }
@@ -18,7 +41,6 @@ class StepThreeContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    calculation_complete: state.calculation_complete,
     email: state.email,
     calculation: state.calculation
   }
