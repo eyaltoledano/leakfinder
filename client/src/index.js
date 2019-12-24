@@ -8,8 +8,9 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux';
 import manageCalculations from './reducers/manageCalculations';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-let store = createStore(manageCalculations, applyMiddleware(thunk));
+let store = createStore(manageCalculations, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
