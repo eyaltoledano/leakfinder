@@ -15,9 +15,17 @@ class HomePage extends React.Component {
   renderCta = () => {
     // This will need some love with Tailwind. Namely a hero unit
     return(
-      <div>
-        <h1>Welcome to Leakfinder</h1>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' ref='cta' onClick={event => this.handleClick(event)}>New Calculation</button>
+      <div className='container mx-auto mt-4'>
+        <div className="flex flex-wrap -mx-4">
+              <div className="w-full mb-6 lg:mb-1 lg:w-full px-4 flex flex-col">
+                <div className="flex-grow flex flex-col bg-white border-t border-b sm:rounded sm:border shadow overflow-hidden">
+                  <div className="border-b p-6 mx-auto">
+                    <h1 className="mb-4">Welcome to Leakfinder</h1>
+                    <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={event => this.handleClick(event)}>New Calculation</button>
+                  </div>
+                </div>
+              </div>
+        </div>
       </div>
     )
   }

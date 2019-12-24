@@ -12,7 +12,6 @@ class App extends Component {
       <Router>
         <div className="App container mx-auto p-4">
             <Navigation />
-
             <Route exact path="/" component={HomePage} />
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/result" component={ResultPage} />

@@ -37,6 +37,7 @@ function manageCalculations(state = initState, action) {
 
     case 'STEP2_COMPLETE':
       return {
+        step: state.step + 1,
         calculation_complete: false,
         email: "",
         calculation: {
@@ -51,6 +52,7 @@ function manageCalculations(state = initState, action) {
 
     case 'STEP3_COMPLETE':
       return {
+        step: state.step,
         calculation_complete: true,
         email: action.email,
         calculation: {
