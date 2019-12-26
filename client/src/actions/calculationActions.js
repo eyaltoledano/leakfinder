@@ -1,11 +1,14 @@
-export const fetchCalculation = () => {
+import axios from 'axios'
+
+export function createCalculation(props) {
   return (dispatch) => {
-    dispatch({ type: 'GET_CALCULATION'})
-    fetch('/api/calculations/')
-    .then(response => {
-      return response.json()
-    }).then(responseJSON => {
-      dispatch({ type: 'ADD_CATS', cats: responseJSON.images })
+    dispatch({ type: 'NEW_CALCULATION_REQUEST' });
+    axios.post('/calculations', props)
+    .then(function (response) {
+      console.log(response);
     })
-  }
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
 }

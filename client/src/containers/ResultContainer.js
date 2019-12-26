@@ -1,19 +1,60 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { createCalculation } from '../actions/calculationActions'
 
 class ResultContainer extends Component {
 
   state = {
+    calculation: {},
     result: {}
   }
 
   componentDidMount() {
-    let props = this.props
+    // deal with CORS not allowed
+    const postCalculationParams = async () => {
+      let props = this.props.props
 
-    console.log(props);
+      const payload = {
+        email: this.props.email,
+        calculation: this.props.calculation
+      }
 
-    // post request to localhost/api/calculations with this.props
+      let data = new FormData()
+      data.append("json", JSON.stringify(payload))
 
+      let readyData = JSON.stringify(payload)
+
+      const requestOptions = {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: readyData
+      }
+
+      const response = await fetch('http://localhost:3001/api/calculations', requestOptions)
+
+      const json = await response.json()
+      const id = json.id
+
+      this.props.dispatch({ type: 'ADD_CALCULATION_ID', id: id })
+
+      this.setState({
+        calculation: json
+      })
+
+      const getCalculationResults = async () => {
+        const response = await fetch(`http://localhost:3001/api/calculations/${this.state.calculation.id}/result`)
+
+        const json = await response.json()
+        const returnedResult = JSON.stringify(json)
+
+        this.props.dispatch({ type: 'ADD_RESULT', result: returnedResult })
+
+        console.log("Result is now in props:");
+        console.log(this.props.result);
+      }
+      getCalculationResults()
+    }
+    postCalculationParams()
   }
 
   render() {
@@ -34,4 +75,12 @@ class ResultContainer extends Component {
   }
 }
 
-export default ResultContainer
+const mapStateToProps = state => {
+  return {
+    email: state.email,
+    calculation: state.calculation,
+    result: state.result
+  }
+}
+
+export default connect(mapStateToProps)(ResultContainer)
