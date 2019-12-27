@@ -9,7 +9,8 @@ class ResultContainer extends Component {
 
   state = {
     calculation: {},
-    result: {}
+    result: {},
+    requesting: false
   }
 
   componentDidMount() {
@@ -44,11 +45,19 @@ class ResultContainer extends Component {
       })
 
       const getCalculationResults = async () => {
+        this.setState({
+          requesting: true
+        })
+
         const response = await fetch(`http://localhost:3001/api/calculations/${this.state.calculation.id}/result`)
 
         const returnedResult = await response.json()
 
         this.props.dispatch({ type: 'ADD_RESULT', result: returnedResult })
+
+        this.setState({
+          requesting: 'completed'
+        })
 
         console.log("Result is now in props:");
         console.log(this.props.result);
@@ -59,6 +68,7 @@ class ResultContainer extends Component {
   }
 
   render() {
+
     return(
       <div className='container mx-auto mt-4'>
         <div className="flex flex-wrap -mx-4">
@@ -67,18 +77,20 @@ class ResultContainer extends Component {
                   <div className="border-b p-6">
                     <div className="flex mb-4">
                       <div className="w-1/2 h-auto">
-                        <Runrate runrate={this.props.result.runrate} />
+                        { this.state.requesting == 'completed' ? <Runrate daily={this.props.result.runrate.daily} weekly={this.props.result.runrate.weekly}
+                        monthly={this.props.result.runrate.monthly}
+                        yearly={this.props.result.runrate.yearly} /> : null }
                       </div>
                       <div className="w-1/2 h-auto">
-                        <FunnelBreakdown conversionRates={this.props.result.conversion_rates}/>
+
                       </div>
                     </div>
                     <div className="flex mb-4">
                       <div className="w-1/2 h-auto">
-                        <ConversionValues conversionValues={this.props.result.conversion_values} />
+
                       </div>
                       <div className="w-1/2 h-auto">
-                        <LeakingVolume leakingVolume={this.props.result.leaking_volume}/>
+
                       </div>
                     </div>
                   </div>
