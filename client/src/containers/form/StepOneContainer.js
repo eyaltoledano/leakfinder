@@ -5,7 +5,8 @@ class StepOneContainer extends Component {
 
   state = {
     time_dimension: 30,
-    average_order_value: ""
+    average_order_value: "",
+    selected: "selected"
   }
 
   handleChange(event) {
@@ -27,10 +28,11 @@ class StepOneContainer extends Component {
               name="time_dimension"
               className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="time_dimension_input"
+              defaultValue="30"
             >
               <option value="1">Day</option>
               <option value="7">Week</option>
-              <option value="30" selected>Month</option>
+              <option value="30">Month</option>
               <option value="365">Year</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

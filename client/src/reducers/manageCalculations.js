@@ -35,7 +35,7 @@ function manageCalculations(state = initState, action) {
     case 'STEP2_COMPLETE':
       let stepHash = {}
       action.funnel_steps.map(step => {
-        stepHash[step.name.toString()] = step.value
+        return stepHash[step.name.toString()] = step.value
       })
 
       return {

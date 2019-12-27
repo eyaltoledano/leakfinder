@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createCalculation } from '../actions/calculationActions'
+import Runrate from '../components/result/Runrate'
+import FunnelBreakdown from '../components/result/FunnelBreakdown'
+import ConversionValues from '../components/result/ConversionValues'
+import LeakingVolume from '../components/result/LeakingVolume'
 
 class ResultContainer extends Component {
 
@@ -12,7 +15,6 @@ class ResultContainer extends Component {
   componentDidMount() {
     // deal with CORS not allowed
     const postCalculationParams = async () => {
-      let props = this.props.props
 
       const payload = {
         email: this.props.email,
@@ -44,8 +46,7 @@ class ResultContainer extends Component {
       const getCalculationResults = async () => {
         const response = await fetch(`http://localhost:3001/api/calculations/${this.state.calculation.id}/result`)
 
-        const json = await response.json()
-        const returnedResult = JSON.stringify(json)
+        const returnedResult = await response.json()
 
         this.props.dispatch({ type: 'ADD_RESULT', result: returnedResult })
 
@@ -64,8 +65,22 @@ class ResultContainer extends Component {
               <div className="w-full mb-6 lg:mb-1 lg:w-full px-4 flex flex-col">
                 <div className="flex-grow flex flex-col bg-white border-t border-b sm:rounded sm:border shadow overflow-hidden">
                   <div className="border-b p-6">
-                  Calculation results here
-
+                    <div className="flex mb-4">
+                      <div className="w-1/2 h-auto">
+                        <Runrate runrate={this.props.result.runrate} />
+                      </div>
+                      <div className="w-1/2 h-auto">
+                        <FunnelBreakdown conversionRates={this.props.result.conversion_rates}/>
+                      </div>
+                    </div>
+                    <div className="flex mb-4">
+                      <div className="w-1/2 h-auto">
+                        <ConversionValues conversionValues={this.props.result.conversion_values} />
+                      </div>
+                      <div className="w-1/2 h-auto">
+                        <LeakingVolume leakingVolume={this.props.result.leaking_volume}/>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
