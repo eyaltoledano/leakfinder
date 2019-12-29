@@ -1,4 +1,5 @@
 import React from 'react'
+import NumberFormat from 'react-number-format';
 
 class Runrate extends React.Component {
   state = {
@@ -50,9 +51,11 @@ class Runrate extends React.Component {
                   </div>
                 </h3>
 
-                <div class="text-grey-darker mb-2">
-                  <span class="text-3xl align-top">$</span>
-                  <span class="text-5xl">{this.state.runrate}</span>
+                <div className="text-grey-darker mb-2">
+                  <span className="text-3xl align-top">$</span>
+                  <span className="text-5xl">
+                    <NumberFormat value={this.state.runrate} displayType={'text'} thousandSeparator={true} />
+                  </span>
                 </div>
 
 

@@ -51,7 +51,7 @@ class ResultContainer extends Component {
 
         const response = await fetch(`http://localhost:3001/api/calculations/${this.state.calculation.id}/result`)
 
-        const returnedResult = await response.json()
+        const returnedResult = await response.clone().json()
 
         this.props.dispatch({ type: 'ADD_RESULT', result: returnedResult })
 
@@ -59,7 +59,7 @@ class ResultContainer extends Component {
           requesting: 'completed'
         })
 
-        console.log("Result is now in props:");
+        console.log("Thanks for using Leakfinder! Here are your results:");
         console.log(this.props.result);
       }
       getCalculationResults()
@@ -73,24 +73,27 @@ class ResultContainer extends Component {
       <div className='container mx-auto mt-4'>
         <div className="flex flex-wrap -mx-4">
               <div className="w-full mb-6 lg:mb-1 lg:w-full px-4 flex flex-col">
-                <div className="flex-grow flex flex-col bg-white border-t border-b sm:rounded sm:border shadow overflow-hidden">
-                  <div className="border-b p-6">
+                <div className="flex-grow flex flex-col ">
+                  <div className=" p-6">
                     <div className="flex mb-4">
                       <div className="w-1/2 h-auto">
-                        { this.state.requesting == 'completed' ? <Runrate daily={this.props.result.runrate.daily} weekly={this.props.result.runrate.weekly}
+                        { this.state.requesting === 'completed' ? <Runrate daily={this.props.result.runrate.daily} weekly={this.props.result.runrate.weekly}
                         monthly={this.props.result.runrate.monthly}
                         yearly={this.props.result.runrate.yearly} /> : null }
                       </div>
                       <div className="w-1/2 h-auto">
-
+                        { this.state.requesting === 'completed' ? <FunnelBreakdown conversionRates={this.props.result.conversion_rates} />
+                        : null }
                       </div>
                     </div>
                     <div className="flex mb-4">
                       <div className="w-1/2 h-auto">
-
+                        { this.state.requesting === 'completed' ? <ConversionValues conversionValues={this.props.result.conversion_values} />
+                        : null }
                       </div>
                       <div className="w-1/2 h-auto">
-
+                        { this.state.requesting === 'completed' ? <LeakingVolume leakingVolume={this.props.result.leaking_volume} />
+                        : null }
                       </div>
                     </div>
                   </div>
