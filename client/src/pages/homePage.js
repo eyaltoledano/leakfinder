@@ -32,9 +32,11 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className="container mx-auto p-4 mt-4">
-        <p>{this.props.calculation_complete}</p>
-        {this.state.showApp ? <FormContainer /> : this.renderCta()}
+      <div className="font-sans bg-grey-lighter">
+        <div className="container mx-auto p-4 mt-4">
+          <p>{this.props.calculation_complete}</p>
+          {this.state.showApp ? <FormContainer /> : this.renderCta()}
+        </div>
       </div>
     )
   }
