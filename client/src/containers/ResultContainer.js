@@ -70,8 +70,7 @@ class ResultContainer extends Component {
   render() {
 
     return(
-      <div className="font-sans bg-grey-lighter">
-        <div className='container mx-auto mt-4'>
+      <div className='container mx-auto mt-4'>
         <div className="flex flex-wrap -mx-4">
               <div className="w-full mb-6 lg:mb-1 lg:w-full px-4 flex flex-col">
                 <div className="flex-grow flex flex-col ">
@@ -100,7 +99,6 @@ class ResultContainer extends Component {
                   </div>
                 </div>
               </div>
-          </div>
         </div>
       </div>
     )
