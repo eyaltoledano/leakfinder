@@ -4,11 +4,13 @@ class Navigation extends React.Component {
   render() {
     return (
       <>
-        <ul className="float-right">
-          <a className="p-2" href="/">Home</a>
-          <a className="p-2" href="/about">About</a>
-          <a className="p-2" href="/programmatic">API</a>
-        </ul>
+        <div className="float-left">
+          <a className="text-indigo-500" href="/">Leakfinder</a>
+        </div>
+        <div className="float-right">
+          <a className="p-2 text-gray-500 text-sm" href="/about">About</a>
+          <a className="p-2 text-gray-500 text-sm" href="/programmatic">API</a>
+        </div>
       </>
     )
   }
