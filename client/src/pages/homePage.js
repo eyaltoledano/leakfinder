@@ -25,15 +25,13 @@ class HomePage extends React.Component {
         <div className="w-2/3">
           <h1 className="text-center my-8 text-5xl md:text-5xl text-gray-800 font-bold leading-loose md:text-left slide-in-bottom-h1 mt-8">Analyze your conversion funnel</h1>
           <h3 className="text-2xl text-gray-700 leading-relaxed mb-5 font-sans">Get an instant breakdown of your conversion funnel, what each conversion event is worth to you, and where the most value is evaporating.</h3>
-          <button className='mt-7 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-6 px-10 rounded-full text-lg' onClick={event => this.handleClick(event)}>Get funnel analysis</button>
+          <button className='mt-7 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-6 px-10 rounded-full text-lg' onClick={event => this.handleClick(event)}>Analyze your funnel</button>
           <span className="text-gray-500 text-sm ml-3">Results in less than 30 seconds and totally free to use.</span>
         </div>
         <div className="w-1/3 h-10">
           <img src={SearchImage} style={{height: 350}} />
         </div>
       </div>
-
-      
       </>
     )
   }

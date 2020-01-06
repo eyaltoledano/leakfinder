@@ -4,6 +4,7 @@ import HomePage from './pages/homePage'
 import AboutPage from './pages/aboutPage'
 import ApiPage from './pages/apiPage'
 import Navigation from './components/navigation'
+import Footer from './components/footer'
 import ResultContainer from './containers/ResultContainer'
 
 class App extends Component {
@@ -15,7 +16,7 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/programmatic" component={ApiPage} />
-            <Route path="/result/:id" component={ResultContainer} />
+            <Footer />
         </div>
       </Router>
     );
