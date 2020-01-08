@@ -4,6 +4,10 @@ import Runrate from '../components/result/Runrate'
 import FunnelBreakdown from '../components/result/FunnelBreakdown'
 import ConversionValues from '../components/result/ConversionValues'
 import LeakingVolume from '../components/result/LeakingVolume'
+import { usePromiseTracker } from 'react-promise-tracker';
+import { trackPromise } from 'react-promise-tracker';
+import Loader from 'react-loader-spinner'
+
 
 class ResultContainer extends Component {
 
@@ -32,6 +36,7 @@ class ResultContainer extends Component {
         headers: {'Content-Type': 'application/json'},
         body: readyData
       }
+
 
       const response = await fetch('https://leakfinder.herokuapp.com/api/calculations', requestOptions)
 
@@ -67,6 +72,48 @@ class ResultContainer extends Component {
     postCalculationParams()
   }
 
+  renderResultGrid = () => {
+    return(
+      <div>
+        <div className="flex mb-4">
+          <div className="w-1/2 h-auto">
+            { this.state.requesting === 'completed' ? <Runrate daily={this.props.result.runrate.daily} weekly={this.props.result.runrate.weekly}
+            monthly={this.props.result.runrate.monthly}
+            yearly={this.props.result.runrate.yearly} /> : null }
+          </div>
+          <div className="w-1/2 h-auto">
+            { this.state.requesting === 'completed' ? <FunnelBreakdown conversionRates={this.props.result.conversion_rates} />
+            : null }
+          </div>
+        </div>
+
+        <div className="flex mb-4">
+          <div className="w-1/2 h-auto">
+            { this.state.requesting === 'completed' ? <ConversionValues conversionValues={this.props.result.conversion_values} />
+            : null }
+          </div>
+          <div className="w-1/2 h-auto">
+            { this.state.requesting === 'completed' ? <LeakingVolume leakingVolume={this.props.result.leaking_volume} />
+            : null }
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  renderLoadingIndicator = () => {
+    return(
+      <div style={{
+           width: "100%",
+           height: "100",
+           display: "flex",
+           justifyContent: "center",
+           alignItems: "center" }}>
+       <Loader type="ThreeDots" color="#677EEA" height="100" width="100" />
+     </div>
+   )
+  }
+
   render() {
 
     return(
@@ -75,27 +122,9 @@ class ResultContainer extends Component {
               <div className="w-full mb-6 lg:mb-1 lg:w-full px-4 flex flex-col">
                 <div className="flex-grow flex flex-col ">
                   <div className=" p-6">
-                    <div className="flex mb-4">
-                      <div className="w-1/2 h-auto">
-                        { this.state.requesting === 'completed' ? <Runrate daily={this.props.result.runrate.daily} weekly={this.props.result.runrate.weekly}
-                        monthly={this.props.result.runrate.monthly}
-                        yearly={this.props.result.runrate.yearly} /> : null }
-                      </div>
-                      <div className="w-1/2 h-auto">
-                        { this.state.requesting === 'completed' ? <FunnelBreakdown conversionRates={this.props.result.conversion_rates} />
-                        : null }
-                      </div>
-                    </div>
-                    <div className="flex mb-4">
-                      <div className="w-1/2 h-auto">
-                        { this.state.requesting === 'completed' ? <ConversionValues conversionValues={this.props.result.conversion_values} />
-                        : null }
-                      </div>
-                      <div className="w-1/2 h-auto">
-                        { this.state.requesting === 'completed' ? <LeakingVolume leakingVolume={this.props.result.leaking_volume} />
-                        : null }
-                      </div>
-                    </div>
+
+                    { this.state.requesting !== 'completed' ? this.renderLoadingIndicator() : this.renderResultGrid() }
+
                   </div>
                 </div>
               </div>
