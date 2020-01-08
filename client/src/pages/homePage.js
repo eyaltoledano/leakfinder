@@ -1,6 +1,7 @@
 import React from 'react'
 import FormContainer from '../containers/FormContainer'
 import SearchImage from '../components/search.svg'
+import { Helmet } from 'react-helmet'
 
 class HomePage extends React.Component {
   state = {
@@ -34,9 +35,15 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className="container mx-auto p-4 mt-4">
-        <p>{this.props.calculation_complete}</p>
-        {this.state.showApp ? <FormContainer /> : this.renderCtaSection()}
+      <div>
+        <Helmet>
+          <title>Leakfinder - Free Conversion Analysis Tool</title>
+          <meta name="description" content="Get an instant breakdown of your conversion funnel, what each conversion event is worth to you, and where the most value is evaporating" />
+        </Helmet>
+        <div className="container mx-auto p-4 mt-4">
+          <p>{this.props.calculation_complete}</p>
+          {this.state.showApp ? <FormContainer /> : this.renderCtaSection()}
+        </div>
       </div>
     )
   }
