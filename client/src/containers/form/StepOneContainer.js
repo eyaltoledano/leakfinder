@@ -9,11 +9,11 @@ class StepOneContainer extends Component {
     selected: "selected"
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
   }
 
-  handleButtonClick(event) {
+  handleButtonClick = (event) => {
     event.preventDefault();
     this.props.dispatch({type: 'STEP1_COMPLETE', time_dimension: this.state.time_dimension, average_order_value: this.state.average_order_value})
   }
@@ -24,7 +24,7 @@ class StepOneContainer extends Component {
           <span className="text-gray-500">Over the last...</span>
           <div className="relative">
             <select
-              onChange={event => this.handleChange(event)}
+              onChange={this.handleChange}
               name="time_dimension"
               className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="time_dimension_input"
@@ -43,13 +43,13 @@ class StepOneContainer extends Component {
           <span className="text-gray-500">My Average Order Value is...</span>
 
           <input
-            onChange={event => this.handleChange(event)}
+            onChange={this.handleChange}
             type="number"
             name="average_order_value"
             className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           />
 
-          <button onClick={event => this.handleButtonClick(event)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-3 float-right">Continue</button>
+          <button onClick={this.handleButtonClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-3 float-right">Continue</button>
           <button className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full float-left mt-3' href="/">Start Over</button>
       </div>
     )

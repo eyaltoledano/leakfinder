@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import manageCalculations from './reducers/manageCalculations';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-let store = createStore(manageCalculations, composeWithDevTools(applyMiddleware(thunk)));
+let store = createStore(manageCalculations, composeWithDevTools(applyMiddleware(thunk))); // intercepts
 
 ReactDOM.render(
   <Provider store={store}>

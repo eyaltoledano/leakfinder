@@ -1,10 +1,6 @@
 import React from 'react'
 import FormContainer from '../containers/FormContainer'
 import SearchImage from '../components/search.svg'
-import GoalsImage from '../components/goals.svg'
-import OptionsImage from '../components/options.svg'
-import SelectionImage from '../components/selection.svg'
-
 
 class HomePage extends React.Component {
   state = {
@@ -29,7 +25,7 @@ class HomePage extends React.Component {
           <span className="text-gray-500 text-sm ml-3">Results in less than 30 seconds and totally free to use.</span>
         </div>
         <div className="w-1/3 h-10">
-          <img src={SearchImage} style={{height: 350}} />
+          <img src={SearchImage} style={{height: 350}} alt="Analyze a funnel"/>
         </div>
       </div>
       </>

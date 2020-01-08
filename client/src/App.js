@@ -5,22 +5,19 @@ import AboutPage from './pages/aboutPage'
 import ApiPage from './pages/apiPage'
 import Navigation from './components/navigation'
 import Footer from './components/footer'
-import ResultContainer from './containers/ResultContainer'
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div className="App container mx-auto p-4">
-            <Navigation />
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/about" component={AboutPage} />
-            <Route exact path="/programmatic" component={ApiPage} />
-            <Footer />
-        </div>
-      </Router>
-    );
-  }
+const App = () => {
+  return (
+    <Router>
+      <div className="App container mx-auto p-4">
+          <Navigation />
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/about" component={AboutPage} />
+          <Route exact path="/programmatic" component={ApiPage} />
+          <Footer />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
