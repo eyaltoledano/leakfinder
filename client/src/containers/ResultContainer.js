@@ -33,7 +33,7 @@ class ResultContainer extends Component {
         body: readyData
       }
 
-      const response = await fetch('http://leakfinder.herokuapp.com/api/calculations', requestOptions)
+      const response = await fetch('https://leakfinder.herokuapp.com/api/calculations', requestOptions)
 
       const json = await response.json()
       const id = json.id
@@ -49,7 +49,7 @@ class ResultContainer extends Component {
           requesting: true
         })
 
-        const response = await fetch(`http://leakfinder.herokuapp.com/api/calculations/${this.state.calculation.id}/result`)
+        const response = await fetch(`https://leakfinder.herokuapp.com/api/calculations/${this.state.calculation.id}/result`)
 
         const returnedResult = await response.clone().json()
 
