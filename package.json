@@ -1,7 +1,8 @@
 {
   "name": "leakfinder",
   "engines": {
-    "node": "6.3.1"
+    "node": "10.15.3",
+    "yarn": "1.15.2"
   },
   "version": "1.0.0",
   "description": "A simple application designed to output valuable conversion metrics",
@@ -25,9 +26,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd ..",
+    "build": "yarn --cwd client install && yarn --cwd client build",
     "deploy": "cp -a client/build/. public/",
-    "postinstall": "npm run build && npm run deploy && echo 'Leakfinder client built!'"
+    "postinstall": "yarn build && yarn deploy && echo 'Leakfinder client built!'"
   },
   "repository": {
     "type": "git",
